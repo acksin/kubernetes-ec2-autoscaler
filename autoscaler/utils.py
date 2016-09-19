@@ -11,12 +11,7 @@ def get_groups_for_hash(asgs, selectors_hash):
     returns a list of groups from asg that match the selectors
     """
     selectors = json.loads(selectors_hash)
-    groups = []
-    for asg in asgs:
-        if asg.is_match_for_selectors(selectors):
-            groups.append(asg)
-    return groups
-
+    return [asg for asg in asgs if asg.is_match_for_selectors(selectors)]
 
 def get_group_for_node(asgs, node):
     for asg in asgs:
