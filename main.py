@@ -28,6 +28,7 @@ DEBUG_LOGGING_MAP = {
 @click.option("--aws-access-key", default=None, envvar='AWS_ACCESS_KEY_ID')
 @click.option("--aws-secret-key", default=None, envvar='AWS_SECRET_ACCESS_KEY')
 @click.option("--instance-init-time", default=25 * 60)
+@click.option("--parkingspot-api-key", default=None, envvar='PARKINGSPOT_API_KEY')
 @click.option("--slack-hook", default=None, envvar='SLACK_HOOK',
               help='Slack webhook URL. If provided, post scaling messages '
                    'to Slack.')
@@ -39,7 +40,7 @@ DEBUG_LOGGING_MAP = {
               count=True)
 def main(cluster_name, regions, sleep, kubeconfig,
          aws_access_key, aws_secret_key, idle_threshold, type_idle_threshold,
-         instance_init_time, slack_hook, dry_run, verbose):
+         instance_init_time, parkingspot_api_key, slack_hook, dry_run, verbose):
     if verbose > 0:
         logger_handler = logging.StreamHandler(sys.stderr)
         logger_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
@@ -58,6 +59,7 @@ def main(cluster_name, regions, sleep, kubeconfig,
                       instance_init_time=instance_init_time,
                       type_idle_threshold=type_idle_threshold,
                       cluster_name=cluster_name,
+                      parkingspot_api_key=parkingspot_api_key,
                       slack_hook=slack_hook,
                       dry_run=dry_run
                       )
